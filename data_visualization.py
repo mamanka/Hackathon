@@ -3,7 +3,8 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 
 def load_data():
-    df = pd.read_csv("train.feats.csv")
+    X = pd.read_csv("train.feats.csv")
+    y = pd.read.csv("train.labels.csv")
     train_X, train_y, test_X, test_y = train_test_split(pd.DataFrame(X), pd.Series(y), train_proportion=2 / 3)
 
 
