@@ -18,6 +18,9 @@ def load_data():
     test_x = X.iloc[test_inds]
     train_y = y.iloc[train_inds]
     test_y = y.iloc[test_inds]
+    test_y['אבחנה-Location of distal metastases'] = test_y['אבחנה-Location of distal metastases'].tolist()
+    train_y['אבחנה-Location of distal metastases'] = train_y['אבחנה-Location of distal metastases'].tolist()
+
 
 if __name__ == '__main__':
     # np.random.seed(0)
