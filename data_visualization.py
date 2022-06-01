@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 def load_data():
     X = pd.read_csv("train.feats.csv")
     y = pd.read_csv("train.labels.0.csv")
-    X.groupby()
+    # X.groupby()
     x_train, x_test, y_train, y_test = train_test_split(X,y,train_size=10000)
     pd.DataFrame(x_train)
     print(x_train)
