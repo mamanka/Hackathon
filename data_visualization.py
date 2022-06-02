@@ -1,3 +1,5 @@
+import math
+
 import pandas as pd
 import numpy as np
 from sklearn.impute import KNNImputer
@@ -20,22 +22,24 @@ def load_data():
     test_y = y.iloc[test_inds]
     test_y['אבחנה-Location of distal metastases'] = test_y['אבחנה-Location of distal metastases'].tolist()
     train_y['אבחנה-Location of distal metastases'] = train_y['אבחנה-Location of distal metastases'].tolist()
-    # train_x.info()
     train_x = train_x.drop(["אבחנה-Tumor depth", "אבחנה-Surgery name3", "אבחנה-Surgery name2", "אבחנה-Tumor width",
                             "אבחנה-Surgery date3", "אבחנה-Surgery date2", "אבחנה-Ivi -Lymphovascular invasion"],
                            axis=1)
     test_x = test_x.drop(["אבחנה-Tumor depth", "אבחנה-Surgery name3", "אבחנה-Surgery name2", "אבחנה-Tumor width",
                           "אבחנה-Surgery date3", "אבחנה-Surgery date2", "אבחנה-Ivi -Lymphovascular invasion"],
                          axis=1)
-    # train_x.columns = train_x.columns.str.replace(" ", "")
-    # print(train_x.isnull().sum(axis = 0))
-    # train_x.fillna(0)
-    print(train_x.head(n=1000))
-    # train_x = pd.get_dummies(train_x, prefix='Form Name', columns=['Form Name'])
-    #
-    # imputer = KNNImputer(n_neighbors=5, weights='uniform', metric='nan_euclidean')
-    # imputer.fit(train_x)
-    # KI67 protein, Basic stage - אבחנה, Age
+    train_x = pd.get_dummies(train_x, prefix='אבחנה-T -Tumor mark (TNM)', columns=['אבחנה-T -Tumor mark (TNM)'])
+    train_x = pd.get_dummies(train_x, prefix='אבחנה-Side', columns=['אבחנה-Side'])
+    train_x.info()
+
+
+def filter_KI166(x):
+    if x >= 20:
+        return 1
+    elif x < 10:
+        return -1
+    else:
+        return 0
 
 
 if __name__ == '__main__':
