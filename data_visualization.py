@@ -33,7 +33,8 @@ def load_data():
                          axis=1)
 
 
-    train_x.rename(columns={'אבחנה-Her2': 'Her2', 'אבחנה-Age': 'Age','אבחנה-T -Tumor mark (TNM)':'Tumor mark'}, inplace=True)
+    train_x.rename(columns={'אבחנה-Her2': 'Her2', 'אבחנה-Age': 'Age','אבחנה-T -Tumor mark (TNM)':'Tumor mark'
+                            ,'אבחנה-Basic stage':'Basic stage'}, inplace=True)
 
 
 
@@ -55,12 +56,12 @@ def load_data():
                                   '+2 FISH positive': 3, 'חיובי': 3}}, inplace=True)
     train_x[her2_title] = train_x[her2_title].apply(lambda x: x if x in her2_labels else 0)
 
-    new_train_x = train_x[["Age", "Her2",'Tumor mark']]
+    new_train_x = train_x[["Age", "Her2",'Tumor mark','Basic stage']]
 
     DECIDED_AGE = 40
 
-    ages = pd.DataFrame(new_train_x["Age"])
-    ages = np.where(ages < 40, 0)
+    # ages = pd.DataFrame(new_train_x["Age"])
+    new_train_x["Age"] = np.where(new_train_x["Age"].to_numpy() < 40, 0,1)
     # for index, row in ages.iterrows():
     #     if row < DECIDED_AGE:
     #         row = 0
