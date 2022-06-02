@@ -20,6 +20,14 @@ def load_data():
     test_y = y.iloc[test_inds]
     test_y['אבחנה-Location of distal metastases'] = test_y['אבחנה-Location of distal metastases'].tolist()
     train_y['אבחנה-Location of distal metastases'] = train_y['אבחנה-Location of distal metastases'].tolist()
+    print(test_y, train_y)
+    train_x.info()
+    train_x.drop(["אבחנה-Tumor depth", "אבחנה-Surgery name3", "אבחנה-Surgery name2", "אבחנה-Tumor width",
+                  "אבחנה-Surgery date3", "אבחנה-Surgery date2"],
+                 axis=1, inplace=True)
+    test_x.drop(["אבחנה-Tumor depth", "אבחנה-Surgery name3", "אבחנה-Surgery name2", "אבחנה-Tumor width",
+                  "אבחנה-Surgery date3", "אבחנה-Surgery date2"],
+                 axis=1, inplace=True)
 
 
 if __name__ == '__main__':
